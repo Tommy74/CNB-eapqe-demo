@@ -1,0 +1,28 @@
+# https://buildpacks.io/docs/operator-guide/create-a-builder/
+
+# Buildpacks to include in builder
+[[buildpacks]]
+uri = "../buildpacks/cnbs-eapqe-demo-maven-buildpack"
+
+[[buildpacks]]
+uri = "../buildpacks/cnbs-eapqe-demo-dummy-buildpack"
+
+# Order used for detection
+[[order]]
+    # maven
+    [[order.group]]
+    id = "cnbs-eapqe-demo/cnbs-eapqe-demo-maven-buildpack"
+    version = "0.0.1"
+
+    # dummy
+    [[order.group]]
+    id = "cnbs-eapqe-demo/cnbs-eapqe-demo-dummy-buildpack"
+    version = "0.0.1"
+
+# Stack that will be used by the builder
+[stack]
+id = "cnbs.stack.eapqe-demo.ubi"
+# This image is used at runtime
+run-image = "quay.io/tborgato/cnbs-stack-demo-run:ubi"
+# This image is used at build-time
+build-image = "quay.io/tborgato/cnbs-stack-demo-build:ubi"

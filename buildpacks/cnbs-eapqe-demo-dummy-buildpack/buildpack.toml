@@ -1,0 +1,8 @@
+api = "0.7"
+
+[buildpack]
+  id = "cnbs-eapqe-demo/cnbs-eapqe-demo-dummy-buildpack"
+  version = "0.0.1"
+
+[[stacks]]
+  id = "cnbs.stack.eapqe-demo.ubi"

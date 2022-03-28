@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+LAYERS_DIR="$1"
+env_dir="$2/env"
+plan_path="$3"
+
+echo "cnbs-eapqe-demo-maven-buildpack in folder ${PWD} - $LAYERS_DIR" >> PIPPO.txt
+cat PIPPO.txt
+
+echo "=================================================="
+echo "$LAYERS_DIR"
+pwd
+echo "=================================================="
+ls -l
+
+exit 0
