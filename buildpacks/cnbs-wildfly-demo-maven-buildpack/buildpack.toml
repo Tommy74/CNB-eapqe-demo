@@ -1,0 +1,8 @@
+api = "0.7"
+
+[buildpack]
+  id = "cnbs-wildfly-demo/cnbs-wildfly-demo-maven-buildpack"
+  version = "0.0.1"
+
+[[stacks]]
+  id = "cnbs.stack.wildfly-demo.ubi"

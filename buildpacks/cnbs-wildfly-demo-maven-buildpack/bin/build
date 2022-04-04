@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+layersdir="$1"
+env_dir="$2/env"
+BUILD_PLAN="$3"
+
+echo "cnbs-wildfly-demo-maven-buildpack in folder ${PWD} - $layersdir" >> PIPPO.txt
+cat PIPPO.txt
+
+echo "=================================================="
+echo "BUILD maven"
+echo "   layersdir: $layersdir"
+echo "   PWD: ${PWD}"
+echo "   JAVA_VERSION: ${JAVA_VERSION}"
+echo "   MAVEN_VERSION: ${MAVEN_VERSION}"
+echo "=================================================="
+ls -l
+
+echo "[INFO] MAVEN_VERSION=${MAVEN_VERSION}"
+
+
+# java layer
+java_layer="$layersdir"/java
+mkdir -p "$java_layer"
+
+cat $BUILD_PLAN
+
+# download java
+jdk_url=$(cat $BUILD_PLAN | grep jdk_url | sed 's/[ "]//g' | cut -d '=' -f 2)
+if [[ ! "$jdk_url" =~ http ]]; then
+    echo "[ERROR] Invalid jdk_url=$jdk_url"
+    exit -1
+fi
+echo "[INFO] jdk_url=${jdk_url}"
+
+# TODO: https://github.com/buildpacks/samples/blob/main/buildpacks/java-maven/bin/build
+wget -q -O - "$jdk_url" | tar pxz -C "${java_layer}" --strip-components=1
+
+
+# maven layer
+maven_layer="$layersdir"/maven
+mkdir -p "$maven_layer"
+
+
+
+exit 0

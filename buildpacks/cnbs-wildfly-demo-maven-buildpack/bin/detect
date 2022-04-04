@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+PLATFORM_DIR=$1 
+BUILD_PLAN=$2
+
+echo "=================================================="
+echo "DETECT"
+echo "   BUILD_PLAN: ${BUILD_PLAN}"
+echo "   PWD: ${PWD}"
+echo "   JAVA_VERSION: ${JAVA_VERSION}"
+echo "   MAVEN_VERSION: ${MAVEN_VERSION}"
+echo "=================================================="
+ls -l
+
+if [[ ! -f pom.xml ]]; then
+   exit 100
+fi
+
+if [[ "$JAVA_VERSION" =~ 11 ]]; then 
+   jdk_url="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz"
+elif [[ "$JAVA_VERSION" =~ 17 ]]; then 
+   jdk_url="https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz"
+else
+   echo "[ERROR] Invalid value JAVA_VERSION=${JAVA_VERSION}! Valid values are [11|17]"
+   exit 100   
+fi
+
+# 3. DECLARE DEPENDENCIES 
+echo "provides = [{ name = \"jdk\" }, { name = \"maven\" }]" > "$BUILD_PLAN"
+echo "requires = [{ name = \"jdk\", metadata = { jdk_url = \"$jdk_url\" } }, { name = \"maven\" }]" >> "$BUILD_PLAN"
+
+
+exit 0

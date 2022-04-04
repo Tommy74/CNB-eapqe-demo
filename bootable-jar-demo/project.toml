@@ -1,0 +1,25 @@
+[project]
+id = "io.buildpacks.wildfly.bootable-jar-demo"
+name = "EAP QE Bootable Jar Demo"
+version = "1.0.0"
+
+[build]
+exclude = [
+    "/readme.md"
+]
+
+# example variable that can cutomize the build for this project
+[[build.env]]
+name='JAVA_VERSION'
+value='11.0.12'
+[[build.env]]
+name='MAVEN_VERSION'
+value='3.8.1'
+
+# override buildpacks inside builder image
+#[[build.buildpacks]]
+#id = "me/rake-tasks"
+#
+#  [build.buildpacks.script]
+#  api = "0.6"
+#  inline = "echo \"[INFO] MAVEN_VERSION=$MAVEN_VERSION\""

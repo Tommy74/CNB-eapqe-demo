@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+PLATFORM_DIR=$1 
+BUILD_PLAN=$2
+
+echo "=================================================="
+echo "DETECT"
+echo "   BUILD_PLAN: ${BUILD_PLAN}"
+echo "   PWD: ${PWD}"
+echo "   JAVA_VERSION: ${JAVA_VERSION}"
+echo "   MAVEN_VERSION: ${MAVEN_VERSION}"
+echo "=================================================="
+ls -l
+
+if [[ ! -f pom.xml ]]; then
+   exit 100
+fi
+
+exit 0

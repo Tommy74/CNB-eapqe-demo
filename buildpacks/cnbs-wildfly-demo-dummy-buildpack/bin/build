@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+layersdir="$1"
+env_dir="$2/env"
+plan_path="$3"
+
+echo "cnbs-wildfly-demo-dummy-buildpack in folder ${PWD} - $layersdir" >> PIPPO.txt
+cat PIPPO.txt
+
+echo "=================================================="
+echo "BUILD dummy"
+echo "   layersdir: $layersdir"
+echo "   PWD: ${PWD}"
+echo "   JAVA_VERSION: ${JAVA_VERSION}"
+echo "   MAVEN_VERSION: ${MAVEN_VERSION}"
+echo "=================================================="
+ls -l
+
+echo "[INFO] MAVEN_VERSION=${MAVEN_VERSION}"
+
+exit 0
